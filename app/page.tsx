@@ -1,9 +1,5 @@
-import Image from "next/image";
+import CodeCapture from "./components/code-capture/code-capture";
 
 export default function Home() {
-  return (
-    <main>
-      <div>Code Capture</div>
-    </main>
-  );
+  return <CodeCapture />;
 }
