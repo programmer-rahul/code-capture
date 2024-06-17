@@ -1,3 +1,5 @@
+import WindowButtons from "./preview/window-buttons";
+
 export default function CodeImagePreview() {
   const code = `function Numbers() {
         const [number, setNumber] = useNow(0);
@@ -12,26 +14,22 @@ export default function CodeImagePreview() {
       `;
 
   return (
-    <div className="preview border items-center p-2 flex flex-col w-full rounded-md">
-      <div className="preview-box w-full border mt-40">
-        <div className="frame w-96 mx-auto border-red-500 max-w-full border-2 p-2 rounded-sm">
-          <div className="window border-emerald-600 border rounded-sm flex flex-col">
-            <div className="flex border justify-between w-full p-2 items-center">
-              <div className="window-buttons flex gap-2">
-                <p className="w-4 h-4 rounded-full bg-orange-600"></p>
-                <p className="w-4 h-4 rounded-full bg-orange-600"></p>
-                <p className="w-4 h-4 rounded-full bg-orange-600"></p>
-              </div>
+    <div className="preview items-center py-3 px-4 flex flex-col w-full rounded-md bg-[#191919]">
+      <div className="preview-box w-full mt-40">
+        {/* frame  */}
+        <div className="frame w-[30rem] mx-auto  max-w-full bg-gradient-to-tr to-purple-600 from-orange-400 p-10 rounded-md">
+          <div className="window flex flex-col">
+            <div className="window-header rounded-t-md bg-[#353742] flex justify-between w-full py-3 px-4 items-center">
+              <WindowButtons />
 
               <div className="window-title">
                 <p>index.js</p>
               </div>
-
-              <div></div>
+              <div className="w-16" />
             </div>
 
-            <div className="content border border-purple-600 p-2 h-full min-h-20">
-              <p>{code}</p>
+            <div className="content rounded-b-md bg-[#282a36] py-3 px-4 h-full min-h-20">
+              <p className="text-xl">{code}</p>
             </div>
           </div>
         </div>
