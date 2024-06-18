@@ -1,3 +1,5 @@
+import MonacoEditor from "@/lib/monoco-editor";
+
 export default function WindowContent() {
   const code = `function Numbers() {
         const [number, setNumber] = useNow(0);
@@ -12,8 +14,8 @@ export default function WindowContent() {
       `;
 
   return (
-    <div className="content rounded-b-md opacity-90 py-3 px-4 h-full min-h-20">
-      <p className="text-xl">{code}</p>
+    <div className="content rounded-b-md opacity-90 h-20">
+      <MonacoEditor />
     </div>
   );
 }
