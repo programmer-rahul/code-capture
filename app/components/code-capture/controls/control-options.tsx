@@ -9,40 +9,45 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useStore from "@/lib/store/store";
-import { setTheme } from "@/lib/themes/change-theme";
+import { setTheme } from "@/lib/editor/themes/change-theme";
 
 import themeList from "monaco-themes/themes/themelist.json";
+import editorLanguages from "@/lib/editor/languages/editor-languages";
 
 export default function ControlOptions() {
+  // store
   const changeEditorTheme = useStore((state) => state.changeEditorTheme);
+  const changeEditorLanguage = useStore((state) => state.changeEditorLanguage);
 
   return (
     <div className="options space-y-4 p-2">
       <div className="language w-full flex gap-2 items-center">
         <div className="option-name w-1/3">Language</div>
         <div className="option-input w-full">
-          <Select>
+          <Select
+            onValueChange={(value) => {
+              changeEditorLanguage(value);
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Javascript" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="javascript">Javascript</SelectItem>
-                <SelectItem value="typescript">Typescript</SelectItem>
-                <SelectItem value="react">React</SelectItem>
-                <SelectItem value="html">Html</SelectItem>
-                <SelectItem value="css">Css</SelectItem>
+                {editorLanguages.map((language) => (
+                  <SelectItem value={language}>{language}</SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
         </div>
       </div>
+
       <div className="theme w-full flex gap-2 items-center">
         <div className="option-name w-1/3">Theme</div>
         <div className="option-input w-full">
           <Select
             onValueChange={(value) => {
-              console.log("value", value);
               changeEditorTheme(value);
               setTheme(value);
             }}

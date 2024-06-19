@@ -3,16 +3,19 @@
 import { Editor, MonacoDiffEditor } from "@monaco-editor/react";
 import React from "react";
 import useStore from "./store/store";
-import { setTheme } from "./themes/change-theme";
+import { setTheme } from "./editor/themes/change-theme";
+import { Languages } from "lucide-react";
 
 export default function MonacoEditor() {
   const editorRef = React.useRef<MonacoDiffEditor>(null);
 
   const windowWidth = useStore((state) => state.windowWidth);
   const changeWindowWidth = useStore((state) => state.changeWindowWidth);
-  const editorTheme = useStore((state) => state.editorTheme);
 
-  // Example function to log scroll width
+  const editorTheme = useStore((state) => state.editorTheme);
+  const editorLanguage = useStore((state) => state.editorLanguage);
+
+  // to adjust editor width based on its content
   const controlEditorWidth = () => {
     if (editorRef.current) {
       const scrollWidth = editorRef.current.getScrollWidth();
@@ -24,18 +27,25 @@ export default function MonacoEditor() {
     }
   };
 
+  console.log('changed language',editorLanguage);
+
   return (
     <Editor
-      language="javascript"
+      language={editorLanguage}
       height={"100%"}
-      value="const width = 55;"
+      value={`class HelloWorldApp {
+        public static void main(String[] args) {
+            System.out.println("Hello World!");
+        }
+    }`}
       theme="vs-dark"
       onMount={(editor) => {
         editorRef.current = editor;
         setTheme(editorTheme);
       }}
-      onChange={() => {
+      onChange={(editor, monaco) => {
         controlEditorWidth();
+        // detectModel()
       }}
       options={{
         lineNumbers: "off",
