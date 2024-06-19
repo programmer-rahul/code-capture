@@ -52,7 +52,7 @@ export default function ControlOptions() {
           <Select
             onValueChange={(value) => {
               changeEditorTheme(value);
-              updateEditorWindowTheme();
+              updateEditorWindowTheme(value);
             }}
           >
             <SelectTrigger>

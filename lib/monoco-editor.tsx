@@ -13,6 +13,8 @@ export default function MonacoEditor() {
   const windowWidth = useStore((state) => state.windowWidth);
   const changeWindowWidth = useStore((state) => state.changeWindowWidth);
 
+  const editorTheme = useStore((state) => state.editorTheme);
+
   const editorLanguage = useStore((state) => state.editorLanguage);
 
   // to adjust editor width based on its content
@@ -27,8 +29,6 @@ export default function MonacoEditor() {
     }
   };
 
-  console.log("changed language", editorLanguage);
-
   return (
     <Editor
       language={editorLanguage}
@@ -41,7 +41,7 @@ export default function MonacoEditor() {
       theme="vs-dark"
       onMount={(editor) => {
         editorRef.current = editor;
-        updateEditorWindowTheme();
+        updateEditorWindowTheme(editorTheme);
       }}
       onChange={() => {
         controlEditorWidth();

@@ -5,8 +5,6 @@ import useStore from "@/lib/store/store";
 export default function WindowHeader() {
   const editorThemeColors = useStore((state) => state.editorThemeColors);
 
-  console.log("edit", editorThemeColors);
-
   return (
     <div
       className="window-header rounded-t-md flex justify-between w-full py-3 px-4 items-center"

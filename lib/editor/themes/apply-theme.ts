@@ -1,7 +1,8 @@
 import { loader } from "@monaco-editor/react";
 
 const applyTheme = async (themeName: string) => {
-  console.log(themeName);
+  console.log("themeName", themeName);
+
   let themeData = await import(`monaco-themes/themes/${themeName}.json`);
 
   themeName &&

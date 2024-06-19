@@ -2,17 +2,14 @@ import { applyTheme } from "@/lib/editor/themes/apply-theme";
 import useStore from "@/lib/store/store";
 
 export default function useEditorTheme() {
-    
-  const editorTheme = useStore((state) => state.editorTheme);
-  const editorThemeColors = useStore((state) => state.editorThemeColors);
+  
   const changeEditorThemeColors = useStore(
     (state) => state.changeEditorThemeColors
   );
 
-  const updateEditorWindowTheme = async () => {
-    const colors = await applyTheme(editorTheme);
+  const updateEditorWindowTheme = async (themeName: string) => {
+    const colors = await applyTheme(themeName);
     changeEditorThemeColors(colors);
-    13;
   };
 
   return { updateEditorWindowTheme };
