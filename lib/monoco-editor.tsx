@@ -3,20 +3,19 @@
 import { Editor, MonacoDiffEditor } from "@monaco-editor/react";
 import React from "react";
 import useStore from "./store/store";
+import { setTheme } from "./themes/change-theme";
 
 export default function MonacoEditor() {
   const editorRef = React.useRef<MonacoDiffEditor>(null);
 
   const windowWidth = useStore((state) => state.windowWidth);
   const changeWindowWidth = useStore((state) => state.changeWindowWidth);
+  const editorTheme = useStore((state) => state.editorTheme);
 
   // Example function to log scroll width
-  const logScrollWidth = () => {
+  const controlEditorWidth = () => {
     if (editorRef.current) {
       const scrollWidth = editorRef.current.getScrollWidth();
-
-      console.log("width", windowWidth);
-      console.log("Scroll width:", scrollWidth);
 
       if (scrollWidth + 28 > windowWidth) {
         console.log("yes");
@@ -33,9 +32,10 @@ export default function MonacoEditor() {
       theme="vs-dark"
       onMount={(editor) => {
         editorRef.current = editor;
+        setTheme(editorTheme);
       }}
       onChange={() => {
-        logScrollWidth();
+        controlEditorWidth();
       }}
       options={{
         lineNumbers: "off",

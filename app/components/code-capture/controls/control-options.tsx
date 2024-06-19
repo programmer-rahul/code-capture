@@ -5,12 +5,17 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useStore from "@/lib/store/store";
+import { setTheme } from "@/lib/themes/change-theme";
+
+import themeList from "monaco-themes/themes/themelist.json";
 
 export default function ControlOptions() {
+  const changeEditorTheme = useStore((state) => state.changeEditorTheme);
+
   return (
     <div className="options space-y-4 p-2">
       <div className="language w-full flex gap-2 items-center">
@@ -35,16 +40,21 @@ export default function ControlOptions() {
       <div className="theme w-full flex gap-2 items-center">
         <div className="option-name w-1/3">Theme</div>
         <div className="option-input w-full">
-          <Select>
+          <Select
+            onValueChange={(value) => {
+              console.log("value", value);
+              changeEditorTheme(value);
+              setTheme(value);
+            }}
+          >
             <SelectTrigger>
-              <SelectValue placeholder="Night-Owl" />
+              <SelectValue placeholder="Night Owl" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="andromeda">Andromeda</SelectItem>
-                <SelectItem value="night-owl">Night-Owl</SelectItem>
-                <SelectItem value="vs-code">Vs-Code</SelectItem>
-                <SelectItem value="github-dark">Github-Dark</SelectItem>
+                {Object.values(themeList).map((theme) => (
+                  <SelectItem value={theme}>{theme}</SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
