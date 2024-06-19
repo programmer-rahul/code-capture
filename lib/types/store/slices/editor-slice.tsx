@@ -11,4 +11,7 @@ export default interface EditorSlice {
 
   editorThemeColors: EditorThemeColors;
   changeEditorThemeColors: (themeColors: EditorThemeColors) => void;
+
+  isEditorMounted : boolean,
+  changeEditorMounted : (value : boolean) => void,
 }

@@ -1,7 +1,7 @@
 import EditorSlice from "@/lib/types/store/slices/editor-slice";
 import { SetState } from "@/lib/types/store/store";
 
-export default function createEditorSlice(set : SetState): EditorSlice {
+export default function createEditorSlice(set: SetState): EditorSlice {
   return {
     editorTheme: "Night Owl",
     changeEditorTheme: (theme) =>
@@ -22,5 +22,8 @@ export default function createEditorSlice(set : SetState): EditorSlice {
       set(() => ({
         editorThemeColors: themeColors,
       })),
+
+    isEditorMounted: false,
+    changeEditorMounted: (value) => set(() => ({ isEditorMounted: value })),
   };
 }

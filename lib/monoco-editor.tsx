@@ -14,6 +14,7 @@ export default function MonacoEditor() {
   const changeWindowWidth = useStore((state) => state.changeWindowWidth);
 
   const editorTheme = useStore((state) => state.editorTheme);
+  const changeEditorMounted = useStore((state) => state.changeEditorMounted);
 
   const editorLanguage = useStore((state) => state.editorLanguage);
 
@@ -40,6 +41,7 @@ export default function MonacoEditor() {
     }`}
       theme="vs-dark"
       onMount={(editor) => {
+        changeEditorMounted(true);
         editorRef.current = editor;
         updateEditorWindowTheme(editorTheme);
       }}
