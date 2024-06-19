@@ -3,16 +3,16 @@
 import { Editor, MonacoDiffEditor } from "@monaco-editor/react";
 import React from "react";
 import useStore from "./store/store";
-import { setTheme } from "./editor/themes/change-theme";
-import { Languages } from "lucide-react";
+import useEditorTheme from "@/hooks/editor-theme";
 
 export default function MonacoEditor() {
   const editorRef = React.useRef<MonacoDiffEditor>(null);
 
+  const { updateEditorWindowTheme } = useEditorTheme();
+
   const windowWidth = useStore((state) => state.windowWidth);
   const changeWindowWidth = useStore((state) => state.changeWindowWidth);
 
-  const editorTheme = useStore((state) => state.editorTheme);
   const editorLanguage = useStore((state) => state.editorLanguage);
 
   // to adjust editor width based on its content
@@ -27,7 +27,7 @@ export default function MonacoEditor() {
     }
   };
 
-  console.log('changed language',editorLanguage);
+  console.log("changed language", editorLanguage);
 
   return (
     <Editor
@@ -41,11 +41,10 @@ export default function MonacoEditor() {
       theme="vs-dark"
       onMount={(editor) => {
         editorRef.current = editor;
-        setTheme(editorTheme);
+        updateEditorWindowTheme();
       }}
-      onChange={(editor, monaco) => {
+      onChange={() => {
         controlEditorWidth();
-        // detectModel()
       }}
       options={{
         lineNumbers: "off",

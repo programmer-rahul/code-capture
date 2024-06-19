@@ -14,7 +14,7 @@ export default function WindowContent() {
       `;
 
   return (
-    <div className="content rounded-b-md opacity-90 h-60">
+    <div className="content rounded-b-md h-60">
       <MonacoEditor />
     </div>
   );

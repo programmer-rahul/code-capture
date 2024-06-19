@@ -1,34 +1,11 @@
 import { create } from "zustand";
-
-interface StoreStates {
-  windowWidth: number;
-  changeWindowWidth: (newWidth: number) => void;
-
-  editorTheme: string;
-  changeEditorTheme: (theme: string) => void;
-
-  editorLanguage: string;
-  changeEditorLanguage: (language: string) => void;
-}
+import createWindowSlice from "./slices/window-slice";
+import createEditorSlice from "./slices/editor-slice";
+import { StoreStates } from "../types/store/store";
 
 const useStore = create<StoreStates>()((set) => ({
-  windowWidth: 600,
-  changeWindowWidth: (newWidth) =>
-    set(() => ({
-      windowWidth: newWidth,
-    })),
-
-  editorTheme: "Night Owl",
-  changeEditorTheme: (theme) =>
-    set(() => ({
-      editorTheme: theme,
-    })),
-
-  editorLanguage: "javascript",
-  changeEditorLanguage: (language) =>
-    set(() => ({
-      editorLanguage: language,
-    })),
+  ...createWindowSlice(set),
+  ...createEditorSlice(set),
 }));
 
 export default useStore;

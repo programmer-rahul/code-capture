@@ -18,7 +18,7 @@ export default function CodeImagePreview() {
           }}
         >
           <div
-            className="window flex flex-col bg-[#353742af] border rounded-md border-[#82738E]"
+            className="window flex flex-col border rounded-md border-[#82738E]"
             style={{
               width: windowWidth,
             }}

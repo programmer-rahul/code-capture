@@ -9,12 +9,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useStore from "@/lib/store/store";
-import { setTheme } from "@/lib/editor/themes/change-theme";
 
 import themeList from "monaco-themes/themes/themelist.json";
 import editorLanguages from "@/lib/editor/languages/editor-languages";
+import useEditorTheme from "@/hooks/editor-theme";
 
 export default function ControlOptions() {
+  // hook
+  const { updateEditorWindowTheme } = useEditorTheme();
+
   // store
   const changeEditorTheme = useStore((state) => state.changeEditorTheme);
   const changeEditorLanguage = useStore((state) => state.changeEditorLanguage);
@@ -49,7 +52,7 @@ export default function ControlOptions() {
           <Select
             onValueChange={(value) => {
               changeEditorTheme(value);
-              setTheme(value);
+              updateEditorWindowTheme();
             }}
           >
             <SelectTrigger>
